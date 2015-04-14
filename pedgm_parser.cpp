@@ -1,7 +1,7 @@
 #include "pedgm_parser.h"
 
-PEDGMParser::PEDGMParser():
-    NMEA("PEDGM"),
+PEDGMParser::PEDGMParser(Stream& stream):
+    NMEA("PEDGM", stream),
     m_messageId(m_tinyGps, SENTENCE_ID, 1),
     m_date(m_tinyGps, SENTENCE_ID, 2),
     m_time(m_tinyGps, SENTENCE_ID, 3),
@@ -23,7 +23,7 @@ unsigned long PEDGMParser::date() {
 };
 
 unsigned long PEDGMParser::time() {
-    return (unsigned long)(String(messageTime.value()).toFloat());
+    return (unsigned long)(String(m_time.value()).toFloat());
 };
 
 double PEDGMParser::latitude() {

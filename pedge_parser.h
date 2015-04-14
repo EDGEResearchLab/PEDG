@@ -6,7 +6,7 @@
 
 class PEDGEParser: public NMEA, public PEDGEDefinition {
     public:
-        PEDGEParser();
+        PEDGEParser(Stream& stream);
 
         int balloonId();
         unsigned long date();

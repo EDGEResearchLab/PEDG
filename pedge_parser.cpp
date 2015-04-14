@@ -1,7 +1,7 @@
 #include "pedge_parser.h"
 
-PEDGEParser::PEDGEParser():
-    NMEA("PEDGE"),
+PEDGEParser::PEDGEParser(Stream& stream):
+    NMEA("PEDGE", stream),
     m_balloonId(m_tinyGps, SENTENCE_ID, 1),
     m_date(m_tinyGps, SENTENCE_ID, 2),
     m_time(m_tinyGps, SENTENCE_ID, 3),

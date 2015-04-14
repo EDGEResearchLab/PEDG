@@ -8,9 +8,8 @@ class NMEA {
     public:
         const String SENTENCE_ID;
 
-        NMEA(String sentenceId);
+        NMEA(String sentenceId, Stream& stream);
 
-        virtual void init(Stream* stream);
         virtual void tick();
         boolean isValid();
 
@@ -27,7 +26,7 @@ class NMEA {
     private:
         // We can read NMEA data off any valid object implementing
         // the Stream interface, not just Serial.
-        Stream* m_stream;
+        Stream& m_stream;
 };
 
 #endif

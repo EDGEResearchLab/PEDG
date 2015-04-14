@@ -6,7 +6,7 @@
 
 class PEDGMParser: public NMEA, public PEDGMDefinition {
     public:
-        PEDGMParser();
+        PEDGMParser(Stream& stream);
         
         String messageId();
         unsigned long date();

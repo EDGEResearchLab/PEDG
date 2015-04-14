@@ -8,18 +8,17 @@
 // $PEDGE Sentence.
 class PEDGEEncoder: public PEDGEDefinition, private NMEA {
     public:
-    	PEDGEEncoder();
-
-    	/**
-         * Initialize the PEDGE Encoder object.
-         * @param stream: Stream interface to read from on ticks
+    	PEDGEEncoder(Stream& stream);
+        /**
+         * @param stream: Stream interface to read GPS data from
          * @param railPin: Pin to read the Rail Voltage from
          * @param tempPin: Pin to read the temperature from
          * @param pressurePin: Pin the pressure sensor is attached to
          * @param humidityPin: Pin to read the humidity sensor
          * @param batteryPin: Pin to read the battery info from
          */
-    	void init(int balloonId, Stream* stream, int railPin, int tempPin, int pressurePin, int humidityPin, int batteryPin);
+        PEDGEEncoder(Stream& stream, int railPin, int tempPin, int pressurePin, int humidityPin, int batteryPin);
+
         /**
          * Method to kick off a read cycle, this will check if the
          * stream is available and read a byte, handling appropriately.

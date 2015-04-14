@@ -1,19 +1,15 @@
 #include "nmea.h"
 
-NMEA::NMEA(String sentenceId):
+NMEA::NMEA(String sentenceId, Stream& stream):
     SENTENCE_ID(sentenceId),
-    m_stream(NULL),
+    m_stream(stream),
     m_tinyGps() {
 
 };
 
-void NMEA::init(Stream* stream) {
-    m_stream = stream;
-};
-
 void NMEA::tick() {
-    if (m_stream->available()) {
-        m_tinyGps.encode(m_stream->read());
+    if (m_stream.available()) {
+        m_tinyGps.encode(m_stream.read());
     }
 };
 

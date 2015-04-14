@@ -2,8 +2,8 @@
 
 #include "pedge_encoder.h"
 
-PEDGEEncoder::PEDGEEncoder():
-    NMEA("PEDGE"),
+PEDGEEncoder::PEDGEEncoder(Stream& stream):
+    NMEA("PEDGE", stream),
     m_balloonId(),
     m_railPin(),
     m_tempPin(),
@@ -13,15 +13,16 @@ PEDGEEncoder::PEDGEEncoder():
 
 }
 
-void PEDGEEncoder::init(int balloonId, Stream* stream, int railPin, int tempPin, int pressurePin, int humidityPin, int batteryPin) {
-    NMEA::init(stream);
-    m_balloonId = balloonId;
-    m_railPin = railPin;
-    m_tempPin = tempPin;
-    m_pressurePin = pressurePin;
-    m_humidityPin = humidityPin;
-    m_batteryPin = batteryPin;
-};
+PEDGEEncoder::PEDGEEncoder(Stream& stream, int railPin, int tempPin, int pressurePin, int humidityPin, int batteryPin):
+    NMEA("PEDGE", stream),
+    m_balloonId(),
+    m_railPin(railPin),
+    m_tempPin(tempPin),
+    m_pressurePin(pressurePin),
+    m_humidityPin(humidityPin),
+    m_batteryPin(batteryPin) {
+
+}
 
 /**
  * Perform a single character read if the stream is available.
@@ -37,7 +38,7 @@ String PEDGEEncoder::encode() {
     //Format: $PEDGE,ID<BalloonId>,<GPSDate>,<GPSTime>,<GPSLat>,<GPSLon>,<GPSAlt>,<GPSSpd>,<GPSCourse>,<GPSNumSats>,<Valid>,<GPSHDOP>,<A1>,<A2>,<A3>,<A4>,<A5>*<CKSUM>
     //  //Build the primary string out, omitting the '$' and '*' since they're not used for the checksum calcs
     String sentence = "PEDGE,ID" + String(balloonId()) + "," + String(date()) + "," + String(time()) + "," + String(latitude(), 6) + "," + String(longitude(), 6) + "," + String(altitude()) + "," + String(speed()) + "," + String(course()) + "," + String(satellites()) + "," + String(isValid()) + "," + String(hdop()) + "," + String(rail()) + "," + String(temperature()) + "," + String(pressure()) + "," + String(humidity()) + "," + String(battery()) + "," + String(cpm());
-    return "$" + sentence + "*" + String(generateChecksum(&sentence), HEX);
+    return "$" + sentence + "*" + String(NMEA::generateChecksum(&sentence), HEX);
 };
 
 int PEDGEEncoder::balloonId() {
