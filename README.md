@@ -1,6 +1,6 @@
 ## PEDG
 
-This repo houses the edge libraries for our proprietary NMEA-Compatible sentences.
+This repo houses the edge arduino libraries for our proprietary NMEA-Compatible sentences.
 
 Many of these sentence definitions are in process of being finalized.
 
@@ -52,7 +52,7 @@ It's generally best to only include what libraries you need, but if you need to 
 #include <TinyGPS++.h>
 #include <edge.h>
 
-// The BEACONNet Node must have a node id, easiser to set this to
+// The BEACONNet Node must have a node id, easier to set this to
 // a constant than to need to remember the magic number 11.
 const int BALLOON_ID = 11;
 
