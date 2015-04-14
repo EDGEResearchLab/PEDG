@@ -30,3 +30,7 @@
 
 # Debug files
 *.dSYM/
+
+# If you use vim with YouCompleteMe
+.ycm_extra_conf.py
+*.pyc
