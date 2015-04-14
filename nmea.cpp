@@ -1,6 +1,6 @@
 #include "nmea.h"
 
-NMEA::NMEA(char* sentenceId):
+NMEA::NMEA(String sentenceId):
     SENTENCE_ID(sentenceId),
     m_stream(NULL),
     m_tinyGps() {
