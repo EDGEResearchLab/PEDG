@@ -6,9 +6,9 @@
 
 class NMEA {
     public:
-        const String SENTENCE_ID;
+        const char* SENTENCE_ID;
 
-        NMEA(String sentenceId, Stream& stream);
+        NMEA(const char* sentenceId, Stream& stream);
 
         virtual void tick();
         boolean isValid();

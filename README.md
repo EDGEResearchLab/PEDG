@@ -29,11 +29,23 @@ Format:
 
 ## PEDGM: Broadcast message
 
-## PEDGD
+* `$PEDGM`: Sentence Identifier
+* `M<Id>`: Node Identifier
+* `<GPSDate>`: GPS Date DDMMYY
+* `<GPSTime>`: GPS Time HHMMSSCC
+* `<GPSLat>`: Decimal Degrees
+* `<GPSLon>`: Decimal Degrees
+* `<GPSAlt>`: Meters
+* `<GPSSpd>`: Knots
+* `<GPSCourse>`: Degrees
+* `<Message>`: Custom message (max characters: TODO)
+* `<Checksum>`: NMEA Checksum
 
-## PEDGC
+## PEDGD: TODO
 
-## PEDGA
+## PEDGC: TODO
+
+## PEDGA: TODO
 
 ## Installation
 
@@ -56,42 +68,40 @@ It's generally best to only include what libraries you need, but if you need to 
 // a constant than to need to remember the magic number 11.
 const int BALLOON_ID = 11;
 
-// Define whatever piece you want to use, in this case the Encoder (air side) for PEDGE sentences
-PEDGEEncoder encoder;
+// Define whatever piece of the library you need, in our example we will be the encoder (Balloon Unit).
+// Note that on construction, you need to tell the library which Serial it should be reading the GPS from.
+// Here it is attached to Serial1, Port 19 for Rx.
+// It is worth noting that there is an overloaded constructor for this as well, which allows initialization
+// with analog pins to use for gathering sensor data.  That would look like this, assuming you set the
+// sensor pins to constants:
+//      PEDGEEncoder encoder(BALLOON_ID, Serial1, RAIL_PIN, TEMP_PIN, PRESSURE_PIN, HUMIDITY_PIN, BATTERY_PIN);
+PEDGEEncoder encoder(BALLOON_ID, Serial1);
 
 void setup() {
-    // We have attached a GPS unit to our Serial1 Rx Port (Pin 19 on the Due)
-    // As a result, it needs to be configured for the anticipated Baud rate
+    // The library will not presume anything for your serial device, so the setup
+    // still needs to initialize the port and set the baud (and any other params)
     Serial1.begin(9600);
 
-    // Since in our example we will want to see the data, also initialize the
-    // PC connection serial line.
+    // Just reading the data is boring, you want to see your work be alive,
+    // in this case we will just write it to the PC.
     Serial.begin(9600);
-
-    // Finally, we need to initialize the encoder to give it the information needed
-    // specifically, which serial it should listen on, and which pins our analog sensors
-    // are attached to (if you don't have the sensors, you can put in the same values or all 0's -
-    // you will just see junk data for those values)
-    // If you are unfamiliar with the `&Serial1` syntax, it is simply passing the memory
-    // location of the serial port object to read from, rather than making a copy.
-    encoder.init(BALLOON_ID, &Serial1, A7, A8, A9, A10, A11);
 }
 
-// As a simple example, we will simply read GPS data for ~5seconds
-// and then publish it to the computer via the programming port
+// As a simple example, we will simply read GPS data for ~5seconds and then publish the generated
+// $PEDGE sentence to the computer via the programming port.
 void loop() {
     unsigned long start = millis();
+    // Read GPS data for ~5 seconds.
     while ((millis() - start) < 5000) {
         // Calling .tick() is very important, this will tell the
-        // encoder to read a byte from the serial port and hold onto
-        // it, building the GPS location information on each call.
-        // Calling it for at least a second continuously should be
-        // enough for a full data set.
+        // encoder to read a byte from the serial port, building
+        // the GPS location information on each call. Calling it
+        // for at least a second continuously should be enough for
+        // a full data set.
         encoder.tick();
     }
 
-    // Print the result to the computer port, check it out in your serial
-    // monitor!
+    // Print the result to the computer port, check it out in your serial  monitor!
     Serial.println(encoder.encode());
 }
 ```

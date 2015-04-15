@@ -2,9 +2,9 @@
 
 #include "pedge_encoder.h"
 
-PEDGEEncoder::PEDGEEncoder(Stream& stream):
-    NMEA("PEDGE", stream),
-    m_balloonId(),
+PEDGEEncoder::PEDGEEncoder(int balloonId, Stream& stream):
+    NMEA(PEDGEDefinition::SENTENCE_ID, stream),
+    m_balloonId(balloonId),
     m_railPin(),
     m_tempPin(),
     m_pressurePin(),
@@ -13,9 +13,9 @@ PEDGEEncoder::PEDGEEncoder(Stream& stream):
 
 }
 
-PEDGEEncoder::PEDGEEncoder(Stream& stream, int railPin, int tempPin, int pressurePin, int humidityPin, int batteryPin):
-    NMEA("PEDGE", stream),
-    m_balloonId(),
+PEDGEEncoder::PEDGEEncoder(int balloonId, Stream& stream, int railPin, int tempPin, int pressurePin, int humidityPin, int batteryPin):
+    NMEA(PEDGEDefinition::SENTENCE_ID, stream),
+    m_balloonId(balloonId),
     m_railPin(railPin),
     m_tempPin(tempPin),
     m_pressurePin(pressurePin),

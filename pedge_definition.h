@@ -4,6 +4,8 @@
 // Marker interface for anything that claims to deal with PEDGE sentences.
 class PEDGEDefinition {
     public:
+        static constexpr const char* SENTENCE_ID = "PEDGE";
+
         virtual int balloonId() = 0;
         virtual unsigned long date() = 0;
         virtual unsigned long time() = 0;

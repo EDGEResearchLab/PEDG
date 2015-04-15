@@ -1,10 +1,9 @@
 #include "nmea.h"
 
-NMEA::NMEA(String sentenceId, Stream& stream):
+NMEA::NMEA(const char* sentenceId, Stream& stream):
     SENTENCE_ID(sentenceId),
-    m_stream(stream),
-    m_tinyGps() {
-
+    m_tinyGps(),
+    m_stream(stream) {
 };
 
 void NMEA::tick() {

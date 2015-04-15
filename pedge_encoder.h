@@ -8,7 +8,7 @@
 // $PEDGE Sentence.
 class PEDGEEncoder: public PEDGEDefinition, private NMEA {
     public:
-    	PEDGEEncoder(Stream& stream);
+    	PEDGEEncoder(int balloonId, Stream& stream);
         /**
          * @param stream: Stream interface to read GPS data from
          * @param railPin: Pin to read the Rail Voltage from
@@ -17,7 +17,7 @@ class PEDGEEncoder: public PEDGEDefinition, private NMEA {
          * @param humidityPin: Pin to read the humidity sensor
          * @param batteryPin: Pin to read the battery info from
          */
-        PEDGEEncoder(Stream& stream, int railPin, int tempPin, int pressurePin, int humidityPin, int batteryPin);
+        PEDGEEncoder(int balloonId, Stream& stream, int railPin, int tempPin, int pressurePin, int humidityPin, int batteryPin);
 
         /**
          * Method to kick off a read cycle, this will check if the

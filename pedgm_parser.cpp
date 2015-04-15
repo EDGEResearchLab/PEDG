@@ -1,16 +1,16 @@
 #include "pedgm_parser.h"
 
 PEDGMParser::PEDGMParser(Stream& stream):
-    NMEA("PEDGM", stream),
-    m_messageId(m_tinyGps, SENTENCE_ID, 1),
-    m_date(m_tinyGps, SENTENCE_ID, 2),
-    m_time(m_tinyGps, SENTENCE_ID, 3),
-    m_latitude(m_tinyGps, SENTENCE_ID, 4),
-    m_longitude(m_tinyGps, SENTENCE_ID, 5),
-    m_altitude(m_tinyGps, SENTENCE_ID, 6),
-    m_speed(m_tinyGps, SENTENCE_ID, 7),
-    m_course(m_tinyGps, SENTENCE_ID, 8),
-    m_message(m_tinyGps, SENTENCE_ID, 9) {
+    NMEA(PEDGMDefinition::SENTENCE_ID, stream),
+    m_messageId(m_tinyGps, PEDGMDefinition::SENTENCE_ID, 1),
+    m_date(m_tinyGps, PEDGMDefinition::SENTENCE_ID, 2),
+    m_time(m_tinyGps, PEDGMDefinition::SENTENCE_ID, 3),
+    m_latitude(m_tinyGps, PEDGMDefinition::SENTENCE_ID, 4),
+    m_longitude(m_tinyGps, PEDGMDefinition::SENTENCE_ID, 5),
+    m_altitude(m_tinyGps, PEDGMDefinition::SENTENCE_ID, 6),
+    m_speed(m_tinyGps, PEDGMDefinition::SENTENCE_ID, 7),
+    m_course(m_tinyGps, PEDGMDefinition::SENTENCE_ID, 8),
+    m_message(m_tinyGps, PEDGMDefinition::SENTENCE_ID, 9) {
 
 }
 

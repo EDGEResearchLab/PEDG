@@ -6,6 +6,8 @@
 // Marker interface for anything that claims to deal with PEDGM sentences.
 class PEDGMDefinition {
     public:
+        static constexpr const char* SENTENCE_ID = "PEDGM";
+
         virtual String messageId() = 0;
         virtual unsigned long date() = 0;
         virtual unsigned long time() = 0;
