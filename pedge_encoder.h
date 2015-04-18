@@ -8,6 +8,14 @@
 // $PEDGE Sentence.
 class PEDGEEncoder: public PEDGEDefinition, private NMEA {
     public:
+        /**
+         * @param balloonId: Unique ID for the node
+         * @param stream: Stream interface to read GPS data from.
+         *
+         * This CTOR assumes EDGE default port assignments for BEACONNet,
+         * if you don't have the analog pins attached - just ignore the
+         * output of the parser library.
+         */
     	PEDGEEncoder(int balloonId, Stream& stream);
         /**
          * @param stream: Stream interface to read GPS data from

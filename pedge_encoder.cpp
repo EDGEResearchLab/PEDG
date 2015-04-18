@@ -5,11 +5,11 @@
 PEDGEEncoder::PEDGEEncoder(int balloonId, Stream& stream):
     NMEA(PEDGEDefinition::SENTENCE_ID, stream),
     m_balloonId(balloonId),
-    m_railPin(),
-    m_tempPin(),
-    m_pressurePin(),
-    m_humidityPin(),
-    m_batteryPin() {
+    m_railPin(A7),
+    m_tempPin(A8),
+    m_pressurePin(A9),
+    m_humidityPin(A10),
+    m_batteryPin(A11) {
 
 }
 
